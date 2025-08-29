@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Pembayaran</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- penting untuk HP -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f6f8;
+    }
+
+    .payment-content {
+      padding: 20px;
+    }
+
+    .payment-box {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 1000px;
+      margin: 20px auto;
+    }
+
+    .bank-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+    }
+
+    .bank {
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      background-color: #f9f9f9;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .bank:hover {
+      transform: scale(1.03);
+    }
+
+    .bank img {
+      max-width: 90px;
+      height: 35px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .note {
+      margin-top: 20px;
+      background: #e8f5e9;
+      padding: 12px;
+      border-left: 5px solid #388e3c;
+      color: #2e7d32;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.6);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 85vh;
+      overflow-y: auto;
+      text-align: center;
+      position: relative;
+    }
+
+    .modal-content img {
+      max-width: 120px;
+      margin-bottom: 10px;
+    }
+
+    .modal-content h3 {
+      margin: 10px 0;
+      font-size: 20px;
+    }
+
+    .modal-content p {
+      font-size: 15px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 26px;
+      color: #aaa;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      color: #000;
+    }
+
+    .va-number {
+      font-weight: bold;
+      font-size: 20px;
+      margin: 10px 0;
+      color: #222;
+    }
+
+    .copy-btn {
+      background: #1976d2;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 6px;
+    }
+
+    .copy-btn:hover {
+      background: #0d47a1;
+    }
+
+    .amount {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 12px 0;
+      color: #d32f2f;
+    }
+
+    .instructions {
+      text-align: left;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    .instructions h4 {
+      margin: 12px 0 8px;
+      color: #333;
+    }
+
+    .instructions ol {
+      margin-left: 18px;
+      line-height: 1.5;
+    }
+
+    /* Responsif HP */
+    @media (max-width: 480px) {
+      .payment-box {
+        padding: 15px;
+      }
+
+      .modal-content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 15px;
+      }
+
+      .va-number {
+        font-size: 18px;
+      }
+
+      .amount {
+        font-size: 20px;
+      }
+
+      .instructions {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-content">
+    <header>
+      <h2>Pembayaran</h2>
+      <p>Dashboard > Pembayaran</p>
+    </header>
+
+    <div class="payment-content">
+      <div class="payment-box">
+        <h2>Pilih Bank untuk Pembayaran</h2>
+        <div class="bank-list">
+          <div class="bank" onclick="openModal('Mandiri', 'img/mandiri.png', '887181690286377')">
+            <img src="img/mandiri.png" alt="Mandiri">
+          </div>
+          <div class="bank" onclick="openModal('BNI', 'img/bni.png', '1234567890')">
+            <img src="img/bni.png" alt="BNI">
+          </div>
+          <div class="bank" onclick="openModal('BCA', 'img/bca.png', '9876543210')">
+            <img src="img/bca.png" alt="BCA">
+          </div>
+          <div class="bank" onclick="openModal('Permata Bank', 'img/permata.png', '770012345678901')">
+            <img src="img/permata.png" alt="Permata Bank">
+          </div>
+          <div class="bank" onclick="openModal('Maybank', 'img/maybank.png', '112233445566')">
+            <img src="img/maybank.png" alt="Maybank">
+          </div>
+          <div class="bank" onclick="openModal('CIMB Niaga', 'img/cimb.png', '800123456789')">
+            <img src="img/cimb.png" alt="CIMB Niaga">
+          </div>
+        </div>
+
+        <div class="note">
+          Setelah melakukan pembayaran, status akan diperbarui secara otomatis dalam 1x24 jam.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="bankModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <img id="modalLogo" src="" alt="Bank Logo">
+      <h3 id="modalBankName">Nama Bank</h3>
+      <p><b>Mohon lakukan pembayaran sesuai dengan nominal di bawah ini:</b></p>
+      <div class="amount">Rp 633.198</div>
+      <p>Nomor Virtual Account:</p>
+      <div class="va-number" id="modalVaNumber">-</div>
+      <button class="copy-btn" onclick="copyVA()">Salin Nomor VA</button>
+
+      <div class="instructions" id="modalInstructions"></div>
+    </div>
+  </div>
+
+  <script>
+    function openModal(bankName, logoSrc, vaNumber) {
+      document.getElementById("modalBankName").innerText = bankName;
+      document.getElementById("modalLogo").src = logoSrc;
+      document.getElementById("modalVaNumber").innerText = vaNumber;
+
+      let instructions = `
+        <h4>Panduan Umum:</h4>
+        <ol>
+          <li>Buka aplikasi atau ATM ${bankName}</li>
+          <li>Pilih menu Pembayaran / Transfer → Virtual Account</li>
+          <li>Masukkan nomor VA: <b>${vaNumber}</b></li>
+          <li>Masukkan nominal Rp 633.198</li>
+          <li>Ikuti instruksi hingga pembayaran berhasil</li>
+        </ol>
+      `;
+
+      document.getElementById("modalInstructions").innerHTML = instructions;
+      document.getElementById("bankModal").style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("bankModal").style.display = "none";
+    }
+
+    function copyVA() {
+      const va = document.getElementById("modalVaNumber").innerText;
+      navigator.clipboard.writeText(va);
+      alert("Nomor VA berhasil disalin: " + va);
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("bankModal");
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pembayaran - UT</title>
+  <style>
+    /* RESET */
+    * {margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif;}
+
+    body {
+      display:flex;
+      min-height:100vh;
+      background:#f7f9fc;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width:240px;
+      background:#002b5c;
+      color:#fff;
+      position:fixed;
+      top:0; bottom:0; left:0;
+      transition:all 0.3s ease;
+      overflow-y:auto;
+      padding-top:60px;
+    }
+    .sidebar.collapsed {
+      width:70px;
+    }
+    .sidebar ul {list-style:none;}
+    .sidebar ul li {
+      padding:15px;
+      display:flex;
+      align-items:center;
+      cursor:pointer;
+    }
+    .sidebar ul li img {
+      width:20px; margin-right:10px;
+      transition:all 0.3s;
+    }
+    .sidebar.collapsed ul li span {
+      display:none;
+    }
+
+    /* HEADER */
+    header {
+      position:fixed;
+      top:0; left:240px; right:0;
+      height:60px;
+      background:#fff;
+      border-bottom:1px solid #ddd;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 20px;
+      transition:all 0.3s;
+    }
+    .sidebar.collapsed ~ .main header {
+      left:70px;
+    }
+
+    .menu-toggle {
+      font-size:20px;
+      cursor:pointer;
+      color:#002b5c;
+    }
+
+    .logout-btn {
+      padding:6px 12px;
+      border:1px solid #002b5c;
+      background:#fff;
+      color:#002b5c;
+      border-radius:6px;
+      cursor:pointer;
+    }
+
+    /* MAIN CONTENT */
+    .main {
+      margin-left:240px;
+      padding:80px 20px;
+      flex:1;
+      transition:all 0.3s;
+    }
+    .sidebar.collapsed ~ .main {
+      margin-left:70px;
+    }
+
+    /* INFO CARDS */
+    .info-section {
+      display:flex;
+      gap:20px;
+      flex-wrap:wrap;
+      margin-bottom:20px;
+    }
+    .card {
+      background:#fff;
+      padding:20px;
+      border-radius:12px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.1);
+      flex:1;
+      min-width:280px;
+    }
+    .circle-avatar {
+      width:60px; height:60px;
+      border-radius:50%; background:#007bff;
+      display:flex; align-items:center; justify-content:center;
+      color:#fff; font-weight:bold; margin-bottom:10px;
+    }
+    .tagihan-sekarang {color:red;}
+    .tagihan-lunas {color:green;}
+
+    /* TABLE */
+    table {
+      width:100%;
+      border-collapse:collapse;
+      margin-top:20px;
+      background:#fff;
+      border-radius:10px;
+      overflow:hidden;
+      box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding:12px;
+      border-bottom:1px solid #eee;
+      text-align:center;
+    }
+    th {
+      background:#007bff;
+      color:#fff;
+    }
+    .aktif {color:blue; font-weight:bold;}
+    .lunas {color:green; font-weight:bold;}
+    .belum-lunas {color:red; font-weight:bold;}
+
+    /* RESPONSIVE */
+    @media(max-width:768px){
+      .info-section {flex-direction:column;}
+      header {left:70px;}
+      .sidebar {width:70px;}
+      .sidebar.collapsed {width:0;}
+      .sidebar.collapsed ~ .main {margin-left:0;}
+    }
+  </style>
+</head>
+<body>
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="sidebar">
+    <ul>
+      <li><img src="https://img.icons8.com/ios/50/ffffff/home.png"/><span> Beranda</span></li>
+      <li><img src="https://img.icons8.com/ios/50/ffffff/book.png"/><span> Registrasi</span></li>
+      <li><img src="https://img.icons8.com/ios/50/ffffff/edit-file.png"/><span> Tutorial</span></li>
+      <li><img src="https://img.icons8.com/ios/50/ffffff/graduation-cap.png"/><span> Ujian</span></li>
+    </ul>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header>
+      <span class="menu-toggle" id="menu-toggle">☰</span>
+      <h2>Pembayaran</h2>
+      <button class="logout-btn">Keluar</button>
+    </header>
+
+    <section class="info-section">
+      <div class="card">
+        <div class="circle-avatar">DA</div>
+        <h3>056131873</h3>
+        <p>DESKI ANDRIYANTO</p>
+        <span>Sistem Informasi</span>
+      </div>
+
+      <div class="card">
+        <p>Tagihan saat ini</p>
+        <h3 class="tagihan-sekarang">Rp 633.198</h3>
+        <p>Total tagihan lunas</p>
+        <h3 class="tagihan-lunas">Rp 1.856.158</h3>
+      </div>
+    </section>
+
+    <section>
+      <h3>Info Pembayaran</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Masa Registrasi</th>
+            <th>Nomor Billing</th>
+            <th>Jenis Tagihan</th>
+            <th>Total Tagihan</th>
+            <th>Status Tagihan</th>
+            <th>Status Bayar</th>
+            <th>Tanggal Lunas</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>2025 Ganjil</td>
+            <td>20251056131873050021</td>
+            <td>SPP NON PENDAS</td>
+            <td>Rp 1.856.158</td>
+            <td><span class="aktif">Aktif</span></td>
+            <td><span class="lunas">Sudah Terbayar</span></td>
+            <td>28/6/2025</td>
+            <td>🖨️</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>2025 Ganjil</td>
+            <td>20251056131873050022</td>
+            <td>Tagihan UKT</td>
+            <td>Rp 633.198</td>
+            <td><span class="aktif">Aktif</span></td>
+            <td><span class="belum-lunas">Belum Bayar</span></td>
+            <td>-</td>
+            <td>
+                <a href="pembayaran.html" title="Bayar Tagihan" style="text-decoration:none; font-size:18px;">💳</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <script>
+    // Toggle Sidebar
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('menu-toggle');
+
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('collapsed');
+    });
+  </script>
+</body>
+</html>

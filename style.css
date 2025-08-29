@@ -1,0 +1,160 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  background-color: #f4f6f8;
+}
+
+.sidebar {
+  width: 60px;
+  background-color: #003366;
+  padding-top: 20px;
+  color: white;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.sidebar img {
+  width: 24px;
+  filter: invert(1);
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  position: relative;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logout-btn {
+  padding: 8px 12px;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.info-section {
+  margin-top: 20px;
+  display: flex;
+  gap: 30px;
+}
+
+.data-mahasiswa {
+  background: white;
+  padding: 20px;
+  display: flex;
+  gap: 15px;
+  border-radius: 10px;
+  width: 40%;
+  align-items: center;
+}
+
+.circle-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #1a73e8;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.info-tagihan {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 40%;
+}
+
+.tagihan-sekarang {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.tagihan-lunas {
+  color: green;
+}
+
+.digital-payment-note {
+  margin-top: 10px;
+  background: #d9edf7;
+  padding: 10px;
+  border-left: 4px solid #31708f;
+  margin-bottom: 20px;
+}
+
+.info-pembayaran table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.info-pembayaran th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.info-pembayaran th {
+  background: #007bff;
+  color: white;
+}
+
+.aktif {
+  background: #d9edf7;
+  color: #31708f;
+  padding: 4px 8px;
+  border-radius: 5px;
+}
+
+.lunas {
+  background: #dff0d8;
+  color: #3c763d;
+  padding: 4px 8px;
+  border-radius: 5px;
+}
+
+.belum-lunas {
+  background: #f2dede;
+  color: #a94442;
+  padding: 4px 8px;
+  border-radius: 5px;
+}
+
+.bayar-btn {
+  background: #28a745;
+  color: white;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.aksi-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
